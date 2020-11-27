@@ -1,0 +1,15 @@
+﻿@model ActivitiesListViewModel
+<section class="testimonials">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 2.5rem; font-size: 40px; color: #fff; font-weight: 600">Etkinlikler</h2>
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="customers-testimonials" class="owl-carousel">
+                    @foreach (var item in Model.activities)
+                    {
+                        @await Html.PartialAsync("_Activities", item)}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

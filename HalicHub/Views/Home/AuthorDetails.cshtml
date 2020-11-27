@@ -1,0 +1,52 @@
+﻿@model AuthorDetailModel
+@await Html.PartialAsync("_Header")
+<section class="banner_area slider-m">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+        <div class="container">
+            <div class="banner_content">
+                <h2>@Model.Authors.NameSurname</h2>
+                <div class="page_link">
+                    <a href="index.html">Anasayfa</a>
+                    <a href="category.html">Yazarlar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="whole-wrap">
+        <div class="container">
+            <div class="section-top-border" style="padding-bottom: 0px">
+                <div class="row">
+                    <div class="col-md-3" style="margin-bottom: 30px">
+                        <img src="~/img/@Model.Authors.Image" alt="" style="border-radius: 50%" class="img-fluid">
+                    </div>
+                    <div class="col-md-9 mt-sm-20 left-align-p">
+                        <blockquote class="generic-blockquote">
+                            <span>@Model.Authors.Description</span><br />
+                            @Html.Raw(Model.Authors.Content)
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container my-5">
+        <h2 style="font-size: 30px; color: #140C40; font-weight: 500">Yazara ait yayınlar</h2>
+        <hr style="border-color: #140C40 !important;">
+        <div class="row">
+            @foreach (var item in Model.News)
+            {
+@await Html.PartialAsync("_NewsList", item)}
+
+            @foreach (var item in Model.Articles)
+            {
+@await Html.PartialAsync("_ArticleList", item)}
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("_Footer")

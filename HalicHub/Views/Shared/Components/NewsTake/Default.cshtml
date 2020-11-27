@@ -1,0 +1,16 @@
+﻿@model NewsListViewModel
+
+<section class="sonhaberler" style="background: #f2f2f3">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 2.5rem; font-size: 40px; color: #140C40; font-weight: 600">Son Haberler</h2>
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="haberler-sonhaberler" class="owl-carousel">
+                    @foreach (var item in Model.News)
+                    {
+                        @await Html.PartialAsync("_News", item)}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

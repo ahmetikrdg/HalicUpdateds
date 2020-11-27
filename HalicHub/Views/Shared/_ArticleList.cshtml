@@ -1,0 +1,16 @@
+﻿@model Article
+
+<div class="col-md-4 text-size p-4">
+    <div class="text-box">
+        <a asp-controller="home" asp-action="ArticleDetails" asp-route-url="@Model.Url">
+            <div class="position-relative w-100" style="height: 250px;background-image: url(/img/@Model.Image); background-size: cover; background-position: center; border-top-left-radius: 10px; border-top-right-radius: 10px">
+            </div>
+        </a>
+        <div class="px-3 pt-4 pb-3" style="background: white; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
+            <a asp-controller="home" asp-action="ArticleDetails" asp-route-url="@Model.Url" class="d-inline-block">
+                <h4 class="text-dark text-box-title" style="font-weight: 600; font-size: 1.1rem;">@Model.Title</h4>
+            </a>
+            <p class="tex-secondary text-box-content">@Model.Description</p>
+        </div>
+    </div>
+</div>

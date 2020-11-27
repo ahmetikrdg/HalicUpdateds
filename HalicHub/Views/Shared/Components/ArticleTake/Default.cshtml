@@ -1,0 +1,31 @@
+﻿@model ArticleListViewModel
+
+<section style="padding-top: 1.9rem; padding-bottom: 1.9rem" class="ftco-section bg-light" id="schedule-section">
+    <div class="container">
+        <div class="row justify-content-center" style="padding-bottom: 0px">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h2 class="mb-4">Son Ekleneler</h2>
+            </div>
+        </div>
+        @foreach (var item in Model.Articles)
+        {
+            <div class="blog-card">
+                <div class="meta">
+                    <div class="photo" style="background-image: url(img/@item.Image)"></div>
+                    <ul class="details">
+                    </ul>
+                </div>
+                <div class="description">
+                    <a asp-controller="home" asp-action="ArticleDetails" asp-route-url="@item.Url">
+                        <h2 style="color: #140C40; font-weight: 700;" class="text-box-title">@item.Title</h2>
+                    </a>
+                    <p class="text-box-content">@item.Description</p>
+                    <p class="read-more">
+                        <a href="#">Devamı</a>
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+

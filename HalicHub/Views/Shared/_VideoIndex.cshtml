@@ -1,0 +1,17 @@
+﻿@model Video
+
+<div class="item">
+    <div class="shadow-effect">
+        <a href="#">
+            <img style="border-radius: 10px" class="img-responsive img-border  img-hover-zoom" src="/img/@Model.Image" alt="">
+            <button type="button" class="video-btn play-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/@Model.Url" data-target="#myModal">
+                <i class="fa fa-play"></i>
+            </button>
+        </a>
+        <div class="item-details text-border">
+            <a href="#">
+                <h5 class="text-box-title">@Model.Tittle</h5>
+            </a>
+        </div>
+    </div>
+</div>

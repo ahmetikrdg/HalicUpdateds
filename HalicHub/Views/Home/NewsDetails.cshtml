@@ -1,0 +1,207 @@
+﻿
+@model NewsDetailModel
+@await Html.PartialAsync("_Header")
+<section class="banner_area slider-m">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+        <div class="container">
+            <div class="banner_content">
+                <h2>@Model.News.Title</h2>
+                <div class="page_link">
+                    <a href="index.html">Anasayfa</a>
+                    <a href="category.html">Haberler</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="blog_area single-post-area" style="padding-bottom: 60px; padding-top: 60px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="main_blog_details">
+                    <img class="img-fluid" src="/img/@Model.News.Image" alt="">
+                    <a href="#">
+                        <h4>@Model.News.Title</h4>
+                    </a>
+                    <div class="user_details">
+                        <div class="float-left">
+                            @foreach (var item in Model.Categories)
+                            {
+                <a asp-controller="Home" asp-action="NewsList" asp-route-category="@item.Url">@item.Tittle</a>}
+                        </div>
+                        <div class="float-right">
+                            <div class="media">
+                                <div class="media-body">
+                                    @foreach (var item in Model.Authors)
+                                    {
+                        <h5>@item.NameSurname</h5>}
+                                    <p>@Model.News.Date</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>@Html.Raw(Model.News.Content)</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget author_widget">
+                        @foreach (var item in Model.Authors)
+                        {
+                <img class="author_img rounded-circle" style="width: 200px" src="~/img/@item.Image" alt="">
+                                <h4><a asp-controller="Home" asp-action="AuthorDetails" asp-route-author="@item.Url">@item.NameSurname</a></h4>
+                                                <p>@item.Description</p>
+                                                                <div class="social_icon">
+                                                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                                                    <a href="#"><i class="fa fa-github"></i></a>
+                                                                    <a href="#"><i class="fa fa-behance"></i></a>
+                                                                </div>
+                                                                                <div class="br"></div>}
+                    </aside>
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">İlgili Yazılar</h3>
+                        @foreach (var items in (List<News>)ViewBag.NewsInfo)
+                        {
+                            if (items.Url != Model.News.Url)
+                            {
+                <div class="media post_item">
+                    <img style="width: 75px" src="/img/@items.Image" alt="post">
+                    <div class="media-body">
+                        <a asp-controller="home" asp-action="NewsDetails" asp-route-url="@items.Url">
+                            <h3>@items.Title</h3>
+                        </a>
+                    </div>
+                </div>}
+        }
+                        <div class="br"></div>
+                    </aside>
+                    @{ 
+                        var word = Model.News.Tags.Split(",");
+                    }
+                    @await Component.InvokeAsync("NewsInCategories")
+                    <aside class="single-sidebar-widget tag_cloud_widget">
+                        <h4 class="widget_title">Başlıklar</h4>
+                        <ul class="list">
+                            @foreach (var item in word)
+                            {
+                                <li><a href="#">@item</a></li>
+                            }
+                        </ul>
+                    </aside>
+                    <aside class="single_sidebar_widget">
+                        <h4 class="widget_title">E-Bülten Aboneliği</h4>
+                        <div class="form-group">
+                            <input class="form-control" name="NameSurname" style="width: 100%; margin-bottom: 20px; border-radius: 0px;" type="text" placeholder="Ad Soyad" id="namesurnamenews">
+                            <input class="form-control" name="Email" style="width: 100%; margin-bottom: 20px; border-radius: 0px;" type="email" placeholder="Email" id="newemailnews">
+                            <button type="submit" style=" background: #140C40; color: white; padding: 10px 5px 10px 5px; width: 100%;" id="btnsubscribernews">ABONE OL</button>
+                        </div>
+
+                    </aside>
+                    <aside class="single_sidebar_widget">
+                        <h4 class="widget_title">E-Bülten Aboneliği İptali</h4>
+                        <div class="form-group">
+                            <div>
+                                <input class="form-control" name="Email" style="width: 100%; margin-bottom: 20px; border-radius: 0px;" type="email" placeholder="Kayıt Olduğunuz Email" id="emailnews">
+                                <button type="submit" style=" background: #140C40; color: white; padding: 10px 5px 10px 5px; width: 100%;" id="btn1news">ABONELİĞİ BIRAK</button>
+
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("_Footer")
+
+@section scriptsnews{
+    <script src="~/js/sweatalert.min.js"></script>
+
+    <script>
+        var emailsucsubribecancel = document.getElementById("emailnews");
+        $("#btn1news").click(function ()
+        {
+            if (elementemailnews != null) {
+                $.ajax({
+                    url: "https://localhost:44396/Admin/EMailArticleDelete",
+                    method: "POST",
+                    data: { Email: emailsucsubribecancel.value },
+                    success: function (res) {
+                        if (res.status = 'ok') {
+                            swal({
+                                title: "Başarılı!",
+                                text: "Artık size email göndermeyeceğiz :(",
+                                icon: "success",
+                                button: "Tamam",
+                            });
+                        }
+                        emailsucsubribecancel.value = "";
+                    },
+                    error: function (hata, thrownError) {
+                        alert(hata.status);
+                        alert(thrownError);
+                        alert(hata.responseText);
+                    }
+                })
+            }
+        })
+
+        //YENİ ABONE EKLEME
+        var elementnamesurnamenews = document.getElementById("namesurnamenews");
+        var elementemailnews = document.getElementById("newemailnews");
+
+        $("#btnsubscribernews").click(function ()
+        {
+            if (elementnamesurnamenews != null || elementemailnews != null) {
+
+                obje = {
+                    nameSurname: elementnamesurnamenews.value,
+                    email: elementemailnews.value,
+                    subject: "",
+                    body: "",
+                };
+
+                $.ajax({
+                    url: "https://localhost:44396/Admin/NewsEmail",
+                    type: "POST",
+                    contentType: "application/json",
+                    dataType: "json",
+                    data: JSON.stringify(obje),
+                    success: function (resp) {
+                        if (resp.status == 'ok') {
+                            swal({
+                                title: "Başarılı!",
+                                text: "Abone olundu :))))...",
+                                icon: "success",
+                                button: "Tamam",
+                            });
+                        }
+                    },
+                    error: function (resp) {
+                        console.log("Dönen Hata: " + resp);
+                        swal({
+                            title: "Başarılı!",
+                            text: "Abone olundu :))))...",
+                            icon: "success",
+                            button: "Tamam",
+                        });
+                        elementnamesurnamenews.value = "";
+                        elementemailnews.value = "";
+                    }
+
+                })
+            }
+        })
+
+
+
+
+
+    </script>
+
+
+}

@@ -1,0 +1,29 @@
+﻿@model VideoListViewModel
+
+<div class="td_wrapper_player td_wrapper_playlist_player_youtube" data-first-video="" data-autoplay="1">
+    <div id="player_youtube" style="height: 100%">
+        @foreach (var item in Model.Videos)
+        {
+    <iframe id="iframeAJtDXIazrMo" src="https://www.youtube.com/embed/@item.Url" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>}
+
+    </div>
+</div>
+<div class="td_container_video_playlist ">
+    <div class="td_video_controls_playlist_wrapper">
+        <div class="td_video_stop_play_control">
+            @foreach (var item in Model.Videos)
+            {
+            <a class="td-sp-video-play td-sp td_youtube_control" onlclick="play(@item.Url)">
+            </a>}
+            <a class="td-sp-video-play td-sp td_youtube_control" onlclick="play(AJtDXIazrMo)">
+            </a>
+        </div>
+        <div class="td_current_video_play_title_youtube td_video_title_playing">
+            Video Playlist
+
+        </div>
+        <div class="td_current_video_play_time_youtube td_video_time_playing">
+        </div>
+    </div>
+
+    

@@ -1,0 +1,44 @@
+﻿@model VideoListViewModel
+@await Html.PartialAsync("_Header")
+<section class="banner_area slider-m">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+        <div class="container">
+            <div class="banner_content">
+                <h2>Yazarlar</h2>
+                <div class="page_link">
+                    <a href="index.html">Anasayfa</a>
+                    <a href="category.html">Yazarlar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="video-p">
+    <div id="td_uid_7_5d9f731f9699b" class="tdc-row">
+        <div class="vc_row td_uid_14_5d9f731f969a8_rand  wpb_row td-pb-row">
+            <div class="vc_column td_uid_15_5d9f731f96d86_rand  wpb_column vc_column_container tdc-column td-pb-span12">
+                <div class="wpb_wrapper">
+                    <div class="td_block_wrap td_block_video_playlist td_uid_16_5d9f731f97589_rand">
+                        <div class="td_block_inner">
+                            <div class="td_video_playlist_column_3">
+                                <div class="td_wrapper_video_playlist">
+                                    @await Component.InvokeAsync("VideoFirst")
+                                    <div id="td_youtube_playlist_video" class="td_playlist_clickable ">
+                                        @foreach (var item in Model.Videos)
+                                        {
+                                    @await Html.PartialAsync("_VideoList", item)}
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("_Footer")
