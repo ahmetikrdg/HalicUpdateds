@@ -1039,7 +1039,7 @@ namespace HalicHub.Controllers
             try
             {
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Burası aynı kalacak
-                client.Credentials = new NetworkCredential("ahmetikrdg@gmail.com", "153248679");//<<<<<<<<<<<<<<<<<<<
+                client.Credentials = new NetworkCredential("ahmetikrdg@gmail.com", "");//<<<<<<<<<<<<<<<<<<<
                 client.EnableSsl = true;
                 MailMessage msj = new MailMessage(); //Yeni bir MailMesajı oluşturuyoruz
                 
@@ -1080,7 +1080,7 @@ namespace HalicHub.Controllers
             try
             {
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Burası aynı kalacak
-                client.Credentials = new NetworkCredential("ahmetikrdg@gmail.com", "153248679");
+                client.Credentials = new NetworkCredential("ahmetikrdg@gmail.com", "");
                 client.EnableSsl = true;
                 MailMessage msj = new MailMessage(); //Yeni bir MailMesajı oluşturuyoruz
                 msj.From = new MailAddress(m.Email, m.NameSurname); //iletişim kısmında girilecek mail buaraya gelecektir
@@ -1129,7 +1129,7 @@ namespace HalicHub.Controllers
             var b = m.Body;
             var tut = _emailServices.GetAll();
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Burası aynı kalacak
-            client.Credentials = new NetworkCredential("ahmetikrdg@gmail.com", "153248679");//<<<<<<<<<<<<<
+            client.Credentials = new NetworkCredential("ahmetikrdg@gmail.com", "");//<<<<<<<<<<<<<
             client.EnableSsl = true;
             MailMessage msj = new MailMessage(); //Yeni bir MailMesajı oluşturuyoruz
             foreach (var item in tut)       
